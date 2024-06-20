@@ -1,0 +1,1 @@
+{"tickers": ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSM", "BRK-B", "LLY", "AVGO", "NVO", "TSLA", "JPM", "V", "WMT", "XOM", "UNH", "TCEHY", "MA", "ASML", "PG", "ORCL", "COST", "NVDA"], "days_to_predict": 10, "investment_budget": 10000.0, "biggest_allowable_net_loss": 1000.0, "allowable_stock_risk": -2.0}

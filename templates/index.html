@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Price Prediction</title>
+</head>
+<body>
+    <h1>Stock Price Prediction</h1>
+
+    <form id="addTickerForm">
+        <label for="new_ticker">Add Ticker:</label>
+        <input type="text" id="new_ticker" name="new_ticker">
+        <button type="button" onclick="addTicker()">Add</button>
+    </form>
+
+    <h2>Added Tickers</h2>
+    <ul id="tickerList"></ul>
+
+    <form action="/predict" method="post">
+
+
+        <label for="days_to_predict">Days to Predict:</label>
+        <input type="number" id="days_to_predict" name="days_to_predict"><br><br>
+
+        <label for="investment_budget">Investment Budget (USD):</label>
+        <input type="number" id="investment_budget" name="investment_budget" step="0.01"><br><br>
+
+        <label for="biggest_allowable_net_loss">Biggest Allowable Net Loss (USD):</label>
+        <input type="number" id="biggest_allowable_net_loss" name="biggest_allowable_net_loss" step="0.01"><br><br>
+
+        <label for="allowable_stock_risk">Allowable Stock Risk (%):</label>
+        <input type="number" id="allowable_stock_risk" name="allowable_stock_risk" step="0.01"><br><br>
+
+
+
+        <input type="submit" value="Predict">
+
+    </form>
+
+    <script>
+
+        function addTicker() {
+            const newTicker = document.getElementById('new_ticker').value;
+            if (newTicker) {
+                fetch('/add_ticker', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ticker: newTicker })
+                }).then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          updateTickerList(data.tickers);
+                          document.getElementById('new_ticker').value = '';
+                      }
+                  });
+            }
+        }
+
+        function removeTicker(ticker) {
+            fetch('/remove_ticker', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ticker: ticker })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      updateTickerList(data.tickers);
+                  }
+              });
+        }
+
+        function updateTickerList(tickers) {
+            const tickerList = document.getElementById('tickerList');
+            tickerList.innerHTML = '';
+            tickers.forEach(ticker => {
+                const li = document.createElement('li');
+                li.textContent = ticker;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'x';
+                removeButton.onclick = () => removeTicker(ticker);
+                li.appendChild(removeButton);
+                tickerList.appendChild(li);
+            });
+        }
+
+        // Fetch the initial list of tickers on page load
+        window.onload = () => {
+            fetch('/get_tickers')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateTickerList(data.tickers);
+                    }
+                });
+        }
+
+
+
+    </script>
+</body>
+</html>
