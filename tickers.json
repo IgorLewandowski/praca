@@ -1,7 +1,70 @@
 {
-  "stocks": [
-    {"symbol": "AAPL"}
-  ],
-  "start_date": "2019-01-01",
-  "end_date": "2022-12-31"
+    "stocks": [
+
+        {"symbol": "AAPL", "sector": "Technology"},
+        {"symbol": "MSFT", "sector": "Technology"},
+        {"symbol": "GOOGL", "sector": "Technology"},
+        {"symbol": "NVDA", "sector": "Technology"},
+        {"symbol": "AMD", "sector": "Technology"},
+        {"symbol": "CRM", "sector": "Technology"},
+
+
+        {"symbol": "JPM", "sector": "Financial"},
+        {"symbol": "BAC", "sector": "Financial"},
+        {"symbol": "GS", "sector": "Financial"},
+        {"symbol": "MS", "sector": "Financial"},
+        {"symbol": "V", "sector": "Financial"},
+
+        {"symbol": "JNJ", "sector": "Healthcare"},
+        {"symbol": "UNH", "sector": "Healthcare"},
+        {"symbol": "PFE", "sector": "Healthcare"},
+        {"symbol": "ABT", "sector": "Healthcare"},
+        {"symbol": "ABBV", "sector": "Healthcare"},
+
+
+        {"symbol": "AMZN", "sector": "Consumer Discretionary"},
+        {"symbol": "TSLA", "sector": "Consumer Discretionary"},
+        {"symbol": "HD", "sector": "Consumer Discretionary"},
+        {"symbol": "NKE", "sector": "Consumer Discretionary"},
+        {"symbol": "SBUX", "sector": "Consumer Discretionary"},
+
+
+        {"symbol": "PG", "sector": "Consumer Staples"},
+        {"symbol": "KO", "sector": "Consumer Staples"},
+        {"symbol": "WMT", "sector": "Consumer Staples"},
+        {"symbol": "COST", "sector": "Consumer Staples"},
+        {"symbol": "PEP", "sector": "Consumer Staples"},
+
+        {"symbol": "CAT", "sector": "Industrial"},
+        {"symbol": "BA", "sector": "Industrial"},
+        {"symbol": "HON", "sector": "Industrial"},
+        {"symbol": "UPS", "sector": "Industrial"},
+        {"symbol": "GE", "sector": "Industrial"},
+
+        {"symbol": "XOM", "sector": "Energy"},
+        {"symbol": "CVX", "sector": "Energy"},
+        {"symbol": "COP", "sector": "Energy"},
+        {"symbol": "SLB", "sector": "Energy"},
+        {"symbol": "EOG", "sector": "Energy"},
+
+        {"symbol": "META", "sector": "Communication Services"},
+        {"symbol": "NFLX", "sector": "Communication Services"},
+        {"symbol": "DIS", "sector": "Communication Services"},
+        {"symbol": "CMCSA", "sector": "Communication Services"},
+        {"symbol": "VZ", "sector": "Communication Services"},
+
+        {"symbol": "LIN", "sector": "Materials"},
+        {"symbol": "APD", "sector": "Materials"},
+        {"symbol": "ECL", "sector": "Materials"},
+        {"symbol": "DD", "sector": "Materials"},
+        {"symbol": "FCX", "sector": "Materials"},
+
+        {"symbol": "PLD", "sector": "Real Estate"},
+        {"symbol": "AMT", "sector": "Real Estate"},
+        {"symbol": "EQIX", "sector": "Real Estate"},
+        {"symbol": "CCI", "sector": "Real Estate"},
+        {"symbol": "SPG", "sector": "Real Estate"}
+    ],
+    "start_date": "2018-01-01",
+    "end_date": "2024-01-25"
 }
