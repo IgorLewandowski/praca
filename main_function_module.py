@@ -385,11 +385,19 @@ def select_tickers(selected_stocks, tickers):
 
 
 def short_best_decision(best_decision, selected_tickers):
-    best_decisions = [(ticker, value) for ticker, value in zip(selected_tickers, best_decision) if value != 0]
-    r = []
-    for ticker, value in best_decisions:
-        r.append([ticker, value])
-    return r
+    #best_decisions = [(ticker, value) for ticker, value in zip(selected_tickers, best_decision) if value != 0]
+    #r = []
+    #for ticker, value in best_decisions:
+    #    r.append([ticker, value])
+
+    import copy
+
+    # Deep copy to ensure nested structures are also copied
+    decisions = copy.deepcopy(list(zip(selected_tickers, best_decision)))
+
+    # Filter non-zero entries and format them
+    return [[ticker, value] for ticker, value in decisions if value != 0]
+    #return r
 
 
 def main_function(tickers, days_to_predict, investment_budget, biggest_allowable_net_loss, allowable_stock_risk):

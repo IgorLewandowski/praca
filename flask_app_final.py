@@ -128,8 +128,13 @@ def add_ticker():
         # Verify ticker exists
         try:
             stock = yf.Ticker(ticker)
+            history = stock.history(period='1d')
+            if history.empty:
+                return jsonify({"success": False, "message": "Invalid ticker symbol"}), 400
+
+            # Additional validation - check if we can get actual stock info
             info = stock.info
-            if not info or 'regularMarketPrice' not in info:
+            if not info or not isinstance(info, dict):
                 return jsonify({"success": False, "message": "Invalid ticker symbol"}), 400
 
             user_data['tickers'].append(ticker)
@@ -208,10 +213,21 @@ def predict():
         if not tickers:
             return jsonify({"error": "No tickers added"}), 400
 
+        # Get parameters from form
         days_to_predict = int(request.form['days_to_predict'])
         investment_budget = float(request.form['investment_budget'])
         biggest_allowable_net_loss = float(request.form['biggest_allowable_net_loss'])
         allowable_stock_risk = float(request.form['allowable_stock_risk'])
+
+        # Update user_data with new parameters
+        user_data = read_user_data()
+        user_data.update({
+            'days_to_predict': days_to_predict,
+            'investment_budget': investment_budget,
+            'biggest_allowable_net_loss': biggest_allowable_net_loss,
+            'allowable_stock_risk': allowable_stock_risk
+        })
+        write_user_data(user_data)
 
         # Check cache first
         params = {
@@ -247,7 +263,10 @@ def predict():
         # Clean cache
         clean_old_cache_entries()
 
-        return jsonify((short_best_decision(best_decision, selected_tickers),
+        shortened = short_best_decision(best_decision, selected_tickers)
+
+
+        return jsonify((shortened,
                         best_decision, regret, i, selected_tickers, regrets, results, l))
 
     except ValueError as ve:

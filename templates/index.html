@@ -211,7 +211,7 @@
 
             <div class="form-group">
                 <label for="allowable_stock_risk">Allowable Stock Risk (%):</label>
-                <input type="number" id="allowable_stock_risk" name="allowable_stock_risk" step="0.01" min="0" max="100" required>
+                <input type="number" id="allowable_stock_risk" name="allowable_stock_risk" step="0.01" min="-100" max="100" required>
             </div>
 
             <button type="submit" id="predict-button">Predict</button>
@@ -242,7 +242,7 @@
         function addTicker() {
             const newTicker = document.getElementById('new_ticker').value.toUpperCase();
             if (newTicker) {
-                document.getElementById('predict-button').disabled = true;
+            //    document.getElementById('predict-button').disabled = true;
                 fetch('/add_ticker', {
                     method: 'POST',
                     headers: {
@@ -256,6 +256,8 @@
                         updateTickerList(data.tickers);
                         document.getElementById('new_ticker').value = '';
                         triggerBackgroundCalculation();
+                    } else {
+                            showError(data.message || 'Failed to add ticker');
                     }
                 })
                 .catch(error => showError('Failed to add ticker: ' + error.message));
@@ -263,7 +265,7 @@
         }
 
         function removeTicker(ticker) {
-            document.getElementById('predict-button').disabled = true;
+        //    document.getElementById('predict-button').disabled = true;
             fetch('/remove_ticker', {
                 method: 'POST',
                 headers: {
